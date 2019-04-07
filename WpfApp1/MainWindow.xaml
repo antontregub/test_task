@@ -1,0 +1,55 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="793">
+    <Window.Resources>
+        <local:IdToColorConverter  x:Key="IdToColorConverter"/>
+        <Style x:Key="IdStyleMaths" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="{Binding Maths, Converter={StaticResource IdToColorConverter}}" />
+        </Style>
+        <Style x:Key="IdStyleDrawing" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="{Binding Drawing, Converter={StaticResource IdToColorConverter}}" />
+        </Style>
+        <Style x:Key="IdStyleLiterature" TargetType="{x:Type DataGridCell}">
+            <Setter Property="Background" Value="{Binding Literature, Converter={StaticResource IdToColorConverter}}" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid AutoGenerateColumns="False" x:Name="docGrid" Margin="142,3,0,7">
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Binding="{Binding Gradebook_Number}" Header="Id_Gradebook_Numberdoc" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="100"/>
+                <DataGridTextColumn Binding="{Binding Groups}" Header="Groups" Width="110"/>
+                <DataGridTextColumn Binding="{Binding Maths}" Header="Maths" Width="100"  CellStyle="{StaticResource IdStyleMaths}"/>
+                <DataGridTextColumn Binding="{Binding Drawing}" Header="Drawing" Width="100" CellStyle="{StaticResource IdStyleDrawing}"/>
+                <DataGridTextColumn Binding="{Binding Literature}" Header="Literature" Width="100" CellStyle="{StaticResource IdStyleLiterature}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel  Margin="0,3,0,7" MaxWidth="130" HorizontalAlignment="Left" Width="137">
+            <TextBlock x:Name="lblName" Text="Name" HorizontalAlignment="Center"  VerticalAlignment="Center"   Width="66" Height="23" Grid.Column="1"/>
+            <TextBox x:Name="txtName" Grid.Column="1" VerticalAlignment="Center"  Height="26" Margin="4,0,-4,0"/>
+            <TextBlock x:Name="lblGroup" Text="Group" HorizontalAlignment="Center"  VerticalAlignment="Center"   Width="66" Height="23" Grid.Column="1"/>
+            <ComboBox Name="GroupList" Height="27" VerticalAlignment="Top"  RenderTransformOrigin="23.885,6.287" HorizontalAlignment="Right" Width="120"  Grid.Column="1" SelectionChanged="ComboBox_Selected"/>
+            <TextBlock x:Name="lblGrade" Text="Grade" HorizontalAlignment="Center"  VerticalAlignment="Center"   Width="66" Height="23" Grid.Column="1"/>
+            <StackPanel  Orientation="Horizontal">
+                <TextBox x:Name="Minvalue" Grid.Column="1"  Margin="5,7,5,7" Height="25" Width="44"/>
+                <TextBox x:Name="Maxvalue" Grid.Column="1" Margin="30,7,12,7"  Height="25" Width="44"/>
+            </StackPanel>
+            <Button Content="Search" MaxWidth="90"  Click="Search" Margin="11,7,12,7" Grid.Column="1" />
+            <Button Content="Clear" MaxWidth="90"  Click="Clear" Grid.Column="1" />
+        </StackPanel>
+    </Grid>
+</Window>
